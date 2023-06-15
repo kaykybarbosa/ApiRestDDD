@@ -1,7 +1,4 @@
-﻿using System;
-
-namespace RestApiDDD.Domain.Entities
-
+﻿namespace RestApiDDD.Domain.Entities
 {
     public class Base
     {

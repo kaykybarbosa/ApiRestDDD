@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PVD+J4ZTud2XjblmULNi6Tk3UlEd8nE8wV6hghXt05Iwl1FZB39aTFWGGEoUkJwQ0lO6+YqkTmdLtwKLgbyFtA==",
+  "dgSpecHash": "A5eIQqY/1JvNiICA4vU6kg9jHO/0fvhPjxMtZK+ddwcOmXQX3t15ebBwF9/Lc9a0hNDH4mNtFY1sg0xnOVxrSA==",
   "success": true,
-  "projectFilePath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.api\\RestApiDDD.api.csproj",
+  "projectFilePath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Api\\RestApiDDD.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

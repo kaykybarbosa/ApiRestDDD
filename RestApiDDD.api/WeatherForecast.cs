@@ -1,4 +1,4 @@
-namespace RestApiDDD.api
+namespace RestApiDDD.Api
 {
     public class WeatherForecast
     {

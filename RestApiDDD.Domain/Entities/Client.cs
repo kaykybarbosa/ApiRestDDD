@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace RestApiDDD.Domain.Entities
 {
     public class Client : Base

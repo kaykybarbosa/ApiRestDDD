@@ -1,4 +1,5 @@
-﻿using RestApiDDD.Domain.Core.Interfaces.Repositiories;
+﻿using Microsoft.EntityFrameworkCore;
+using RestApiDDD.Domain.Core.Interfaces.Repositiories;
 
 namespace RestApiDDD.Infrastructure.Data.Repositories
 {
@@ -6,35 +7,28 @@ namespace RestApiDDD.Infrastructure.Data.Repositories
     {
         private readonly ConnectionContext _context;
 
-        public RepositoryBase(ConnectionContext context) 
-        {
-            _context = context;
-        }
+        public RepositoryBase(ConnectionContext context) => _context = context;
 
         public void Add(TEntity entity)
         {
-            _context.Add(entity);
+            _context.Set<TEntity>().Add(entity);
             _context.SaveChanges();
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+           _context.Set<TEntity>().Remove(entity);
+           _context.SaveChanges();
         }
 
-        public IEnumerable<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<TEntity> GetAll() => _context.Set<TEntity>().ToList();
 
-        public TEntity GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public TEntity GetById(int id) => _context.Set<TEntity>().Find(id);
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

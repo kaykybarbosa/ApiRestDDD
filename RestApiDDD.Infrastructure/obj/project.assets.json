@@ -228,6 +228,16 @@
           }
         }
       },
+      "RestApiDDD.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/RestApiDDD.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RestApiDDD.Application.dll": {}
+        }
+      },
       "RestApiDDD.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -689,6 +699,11 @@
         "system.runtime.nuspec"
       ]
     },
+    "RestApiDDD.Application/1.0.0": {
+      "type": "project",
+      "path": "../RestApiDDD.Application/RestApiDDD.Application.csproj",
+      "msbuildProject": "../RestApiDDD.Application/RestApiDDD.Application.csproj"
+    },
     "RestApiDDD.Domain/1.0.0": {
       "type": "project",
       "path": "../RestApiDDD.Domain/RestApiDDD.Domain.csproj",
@@ -703,6 +718,7 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.EntityFrameworkCore >= 7.0.7",
+      "RestApiDDD.Application >= 1.0.0",
       "RestApiDDD.Domain >= 1.0.0",
       "RestApiDDD.Domain.Core >= 1.0.0"
     ]
@@ -734,6 +750,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Application\\RestApiDDD.Application.csproj": {
+              "projectPath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Application\\RestApiDDD.Application.csproj"
+            },
             "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain.Core\\RestApiDDD.Domain.Core.csproj": {
               "projectPath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain.Core\\RestApiDDD.Domain.Core.csproj"
             },

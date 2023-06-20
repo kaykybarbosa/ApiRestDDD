@@ -15,3 +15,5 @@ D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\obj\Debug\net7.0\RestApiDDD.I
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\obj\Debug\net7.0\refint\RestApiDDD.Infrastructure.dll
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\obj\Debug\net7.0\RestApiDDD.Infrastructure.pdb
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\obj\Debug\net7.0\ref\RestApiDDD.Infrastructure.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\bin\Debug\net7.0\RestApiDDD.Application.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Infrastructure\bin\Debug\net7.0\RestApiDDD.Application.pdb

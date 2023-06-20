@@ -9,6 +9,7 @@
       "RestApiDDD.Infrastructure/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.7",
+          "RestApiDDD.Application": "1.0.0",
           "RestApiDDD.Domain": "1.0.0",
           "RestApiDDD.Domain.Core": "1.0.0"
         },
@@ -135,6 +136,11 @@
           "Microsoft.NETCore.Targets": "1.1.3"
         }
       },
+      "RestApiDDD.Application/1.0.0": {
+        "runtime": {
+          "RestApiDDD.Application.dll": {}
+        }
+      },
       "RestApiDDD.Domain/1.0.0": {
         "dependencies": {
           "System.Runtime": "4.3.1"
@@ -256,6 +262,11 @@
       "sha512": "sha512-abhfv1dTK6NXOmu4bgHIONxHyEqFjW8HwXPmpY9gmll+ix9UNo4XDcmzJn6oLooftxNssVHdJC1pGT9jkSynQg==",
       "path": "system.runtime/4.3.1",
       "hashPath": "system.runtime.4.3.1.nupkg.sha512"
+    },
+    "RestApiDDD.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "RestApiDDD.Domain/1.0.0": {
       "type": "project",

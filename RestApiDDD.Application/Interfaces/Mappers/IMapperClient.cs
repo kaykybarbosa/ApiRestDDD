@@ -1,7 +1,7 @@
 ﻿using RestApiDDD.Application.DTOs;
 using RestApiDDD.Domain.Entities;
 
-namespace RestApiDDD.Infrastructure.CrossCutting.Intefaces
+namespace RestApiDDD.Application.Interfaces.Mappers
 {
     public interface IMapperClient
     {

@@ -1,20 +1,20 @@
 ﻿using RestApiDDD.Application.DTOs;
+using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Entities;
-using RestApiDDD.Infrastructure.CrossCutting.Intefaces;
 
-namespace RestApiDDD.Infrastructure.CrossCutting.Mapper
+namespace RestApiDDD.Application.Mappers
 {
     public class MapperProduc : IMapperProduct
     {
-        public Product MapperEntityToDto(ProductDto productDto)
+        public Product MapperDtoToEntity(ProductDto productDto)
         {
-            var product = new Product() 
-            { 
+            var product = new Product()
+            {
                 Id = productDto.Id,
                 Name = productDto.Name,
                 Price = productDto.Price,
             };
-            
+
             return product;
         }
 
@@ -22,7 +22,7 @@ namespace RestApiDDD.Infrastructure.CrossCutting.Mapper
         {
             var productDto = new ProductDto()
             {
-                Id= product.Id,
+                Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
             };

@@ -1,8 +1,8 @@
 ﻿using RestApiDDD.Application.DTOs;
+using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Entities;
-using RestApiDDD.Infrastructure.CrossCutting.Intefaces;
 
-namespace RestApiDDD.Infrastructure.CrossCutting.Mapper
+namespace RestApiDDD.Application.Mappers
 {
     public class MapperClient : IMapperClient
     {
@@ -10,20 +10,20 @@ namespace RestApiDDD.Infrastructure.CrossCutting.Mapper
         {
             var client = new Client()
             {
-                Id = clientDto.Id, 
+                Id = clientDto.Id,
                 Name = clientDto.Name,
                 LastName = clientDto.LastName,
                 Email = clientDto.Email
             };
-            
+
             return client;
         }
 
         public ClientDto MapperEntityToDto(Client client)
         {
             var clientDto = new ClientDto()
-            { 
-                Id= client.Id,
+            {
+                Id = client.Id,
                 Name = client.Name,
                 LastName = client.LastName,
                 Email = client.Email
@@ -41,9 +41,8 @@ namespace RestApiDDD.Infrastructure.CrossCutting.Mapper
                 LastName = c.LastName,
                 Email = c.Email
             });
-            
+
             return clientsDto;
         }
     }
 }
- 

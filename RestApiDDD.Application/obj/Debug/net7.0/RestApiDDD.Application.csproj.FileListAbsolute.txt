@@ -10,3 +10,8 @@ D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\obj\Debug\net7.0\RestApiDDD.Appl
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\obj\Debug\net7.0\refint\RestApiDDD.Application.dll
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\obj\Debug\net7.0\RestApiDDD.Application.pdb
 D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\obj\Debug\net7.0\ref\RestApiDDD.Application.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\bin\Debug\net7.0\RestApiDDD.Domain.Core.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\bin\Debug\net7.0\RestApiDDD.Domain.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\bin\Debug\net7.0\RestApiDDD.Domain.Core.pdb
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\bin\Debug\net7.0\RestApiDDD.Domain.pdb
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Application\obj\Debug\net7.0\RestApiDDD.Application.csproj.CopyComplete

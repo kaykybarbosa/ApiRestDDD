@@ -1,12 +1,12 @@
 ﻿using RestApiDDD.Application.DTOs;
 using RestApiDDD.Domain.Entities;
 
-namespace RestApiDDD.Infrastructure.CrossCutting.Intefaces
+namespace RestApiDDD.Application.Interfaces.Mappers
 {
     public interface IMapperProduct
     {
-        Product MapperEntityToDto(ProductDto productDto);
+        Product MapperDtoToEntity(ProductDto productDto);
         IEnumerable<ProductDto> MapperListProductDto(IEnumerable<Product> products);
-        ProductDto MapperEntityToDto(Product product); 
+        ProductDto MapperEntityToDto(Product product);
     }
 }

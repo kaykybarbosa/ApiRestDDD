@@ -27,7 +27,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain.Core\\RestApiDDD.Domain.Core.csproj": {
+                "projectPath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain.Core\\RestApiDDD.Domain.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

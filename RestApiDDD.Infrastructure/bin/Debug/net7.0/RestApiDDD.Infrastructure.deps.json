@@ -137,6 +137,9 @@
         }
       },
       "RestApiDDD.Application/1.0.0": {
+        "dependencies": {
+          "RestApiDDD.Domain.Core": "1.0.0"
+        },
         "runtime": {
           "RestApiDDD.Application.dll": {}
         }

@@ -1,0 +1,15 @@
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\bin\Debug\net7.0\RestApiDDD.Domain.Core.deps.json
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\bin\Debug\net7.0\RestApiDDD.Domain.Core.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\bin\Debug\net7.0\RestApiDDD.Domain.Core.pdb
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\bin\Debug\net7.0\RestApiDDD.Domain.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\bin\Debug\net7.0\RestApiDDD.Domain.pdb
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.csproj.AssemblyReference.cache
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.AssemblyInfoInputs.cache
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.AssemblyInfo.cs
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.csproj.CoreCompileInputs.cache
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.csproj.CopyComplete
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\refint\RestApiDDD.Domain.Core.dll
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\RestApiDDD.Domain.Core.pdb
+D:\RestApiDDD\RestApiDDD\RestApiDDD.Domain.Core\obj\Debug\net7.0\ref\RestApiDDD.Domain.Core.dll

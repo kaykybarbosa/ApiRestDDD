@@ -6,6 +6,6 @@
         void Delete(TEntity entity);
         void Update(TEntity entity);
         IEnumerable<TEntity> GetAll();
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
     }
 }

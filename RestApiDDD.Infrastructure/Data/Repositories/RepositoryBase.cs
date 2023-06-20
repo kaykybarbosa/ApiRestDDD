@@ -23,7 +23,7 @@ namespace RestApiDDD.Infrastructure.Data.Repositories
 
         public IEnumerable<TEntity> GetAll() => _context.Set<TEntity>().ToList();
 
-        public TEntity GetById(int id) => _context.Set<TEntity>().Find(id);
+        public TEntity GetById(Guid id) => _context.Set<TEntity>().Find(id);
 
         public void Update(TEntity entity)
         {

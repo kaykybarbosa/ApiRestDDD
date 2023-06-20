@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestApiDDD.Domain.Core\RestApiDDD.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>

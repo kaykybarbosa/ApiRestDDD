@@ -2,7 +2,7 @@
 
 namespace RestApiDDD.Domain.Core.Interfaces.Repositiories
 {
-    public interface IRepositoyProduct : IRepositoryBase<Product>
+    public interface IRepositoryProduct : IRepositoryBase<Product>
     {
     }
 }

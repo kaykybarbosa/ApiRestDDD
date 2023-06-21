@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "Autofac/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "4.7.1"
+        },
+        "compile": {
+          "lib/net7.0/Autofac.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Autofac.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore/7.0.7": {
         "type": "package",
         "dependencies": {
@@ -216,6 +232,19 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "System.Diagnostics.DiagnosticSource/4.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Runtime/4.3.1": {
         "type": "package",
         "dependencies": {
@@ -266,10 +295,44 @@
         "runtime": {
           "bin/placeholder/RestApiDDD.Domain.Core.dll": {}
         }
+      },
+      "RestApiDDD.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "RestApiDDD.Domain.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RestApiDDD.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RestApiDDD.Services.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Autofac/7.0.1": {
+      "sha512": "J9Iz0Q+YU3uf82i8Lee0NpQOlRYfwHxwVV26jdG3zH3LFE5Y9Rx97Mju7Nswwzh/C7kVJALkTL860Y7e+mcLaw==",
+      "type": "package",
+      "path": "autofac/7.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "autofac.7.0.1.nupkg.sha512",
+        "autofac.nuspec",
+        "icon.png",
+        "lib/net6.0/Autofac.dll",
+        "lib/net6.0/Autofac.xml",
+        "lib/net7.0/Autofac.dll",
+        "lib/net7.0/Autofac.xml",
+        "lib/netstandard2.0/Autofac.dll",
+        "lib/netstandard2.0/Autofac.xml",
+        "lib/netstandard2.1/Autofac.dll",
+        "lib/netstandard2.1/Autofac.xml"
+      ]
+    },
     "Microsoft.EntityFrameworkCore/7.0.7": {
       "sha512": "t4rjHwogWpU1QRWbLlpw3JCbfiNd/CsolaWRykgjelQzS0yZlCoqDGZLpPwJXBag3aMuFqifoOHO3JbmSdikIA==",
       "type": "package",
@@ -610,6 +673,32 @@
         "runtime.json"
       ]
     },
+    "System.Diagnostics.DiagnosticSource/4.7.1": {
+      "sha512": "j81Lovt90PDAq8kLpaJfJKV/rWdWuEk6jfV+MBkee33vzYLEUsy4gXK8laa9V2nZlLM9VM9yA/OOQxxPEJKAMw==",
+      "type": "package",
+      "path": "system.diagnostics.diagnosticsource/4.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net45/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net46/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net46/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.xml",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml",
+        "system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Runtime/4.3.1": {
       "sha512": "abhfv1dTK6NXOmu4bgHIONxHyEqFjW8HwXPmpY9gmll+ix9UNo4XDcmzJn6oLooftxNssVHdJC1pGT9jkSynQg==",
       "type": "package",
@@ -716,14 +805,21 @@
       "type": "project",
       "path": "../RestApiDDD.Domain.Core/RestApiDDD.Domain.Core.csproj",
       "msbuildProject": "../RestApiDDD.Domain.Core/RestApiDDD.Domain.Core.csproj"
+    },
+    "RestApiDDD.Services/1.0.0": {
+      "type": "project",
+      "path": "../RestApiDDD.Services/RestApiDDD.Services.csproj",
+      "msbuildProject": "../RestApiDDD.Services/RestApiDDD.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Autofac >= 7.0.1",
       "Microsoft.EntityFrameworkCore >= 7.0.7",
       "RestApiDDD.Application >= 1.0.0",
       "RestApiDDD.Domain >= 1.0.0",
-      "RestApiDDD.Domain.Core >= 1.0.0"
+      "RestApiDDD.Domain.Core >= 1.0.0",
+      "RestApiDDD.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -761,6 +857,9 @@
             },
             "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain\\RestApiDDD.Domain.csproj": {
               "projectPath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Domain\\RestApiDDD.Domain.csproj"
+            },
+            "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Services\\RestApiDDD.Services.csproj": {
+              "projectPath": "D:\\RestApiDDD\\RestApiDDD\\RestApiDDD.Services\\RestApiDDD.Services.csproj"
             }
           }
         }
@@ -775,6 +874,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Autofac": {
+            "target": "Package",
+            "version": "[7.0.1, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.7, )"

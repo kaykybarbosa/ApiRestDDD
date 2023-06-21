@@ -6,8 +6,8 @@ namespace RestApiDDD.Services
 {
     public class ServiceProduct : ServiceBase<Product>, IServiceProduct
     {
-        private readonly IRepositoyProduct _repositoyProduct;
-        public ServiceProduct(IRepositoyProduct repositoyProduct)
+        private readonly IRepositoryProduct _repositoyProduct;
+        public ServiceProduct(IRepositoryProduct repositoyProduct)
             :base(repositoyProduct)
         {
             _repositoyProduct = repositoyProduct;

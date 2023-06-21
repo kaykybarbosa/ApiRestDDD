@@ -3,7 +3,7 @@ using RestApiDDD.Domain.Entities;
 
 namespace RestApiDDD.Infrastructure.Data.Repositories
 {
-    public class RepositoryClient<TEntity> : RepositoryBase<Client>, IRepositoryClient
+    public class RepositoryClient : RepositoryBase<Client>, IRepositoryClient
     {
         private readonly ConnectionContext _context;
 

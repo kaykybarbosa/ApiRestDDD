@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
   </ItemGroup>
 
@@ -14,10 +15,7 @@
     <ProjectReference Include="..\RestApiDDD.Application\RestApiDDD.Application.csproj" />
     <ProjectReference Include="..\RestApiDDD.Domain.Core\RestApiDDD.Domain.Core.csproj" />
     <ProjectReference Include="..\RestApiDDD.Domain\RestApiDDD.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CrossCutting\IOC\" />
+    <ProjectReference Include="..\RestApiDDD.Services\RestApiDDD.Services.csproj" />
   </ItemGroup>
 
 </Project>

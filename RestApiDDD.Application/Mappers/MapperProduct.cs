@@ -4,7 +4,7 @@ using RestApiDDD.Domain.Entities;
 
 namespace RestApiDDD.Application.Mappers
 {
-    public class MapperProduc : IMapperProduct
+    public class MapperProduct : IMapperProduct
     {
         public Product MapperDtoToEntity(ProductDto productDto)
         {

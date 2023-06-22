@@ -5,7 +5,7 @@ using RestApiDDD.Domain.Core.Interfaces.Services;
 
 namespace RestApiDDD.Application
 {
-    public class ApplicationServiceProduct : IApplicationSerivceProduct
+    public class ApplicationServiceProduct : IApplicationServiceProduct
     {
         private readonly IServiceProduct _serviceProduct;
         private readonly IMapperProduct _mapperProduct;

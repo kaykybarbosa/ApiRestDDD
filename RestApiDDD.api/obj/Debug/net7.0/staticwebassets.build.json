@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "aOaBkS3fYkSiI+kifarkRQaztN6gzQ2jZLAJMHsa/+0=",
-  "Source": "RestApiDDD.Api",
-  "BasePath": "_content/RestApiDDD.Api",
+  "Hash": "ryjhG8YjE/P+EFYkYohQPPLYsXkLu4Gx7nPI3JTmZIs=",
+  "Source": "Rest.ApiDDD.Api",
+  "BasePath": "_content/Rest.ApiDDD.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

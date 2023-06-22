@@ -2,7 +2,7 @@
 
 namespace RestApiDDD.Application.Interfaces
 {
-    public interface IApplicationSerivceProduct
+    public interface IApplicationServiceProduct
     {
         void Add(ProductDto productDto);
         void Delete(ProductDto productDto);

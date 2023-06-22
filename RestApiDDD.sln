@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33717.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Api", "RestApiDDD.Api\RestApiDDD.Api.csproj", "{95849B35-AB3D-4E68-9B10-B5503D48BD32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rest.ApiDDD.Api", "RestApiDDD.Api\Rest.ApiDDD.Api.csproj", "{95849B35-AB3D-4E68-9B10-B5503D48BD32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Application", "RestApiDDD.Application\RestApiDDD.Application.csproj", "{3D3E233B-E436-4153-A1AA-E6DFE0BDD2C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Application", "RestApiDDD.Application\RestApiDDD.Application.csproj", "{3D3E233B-E436-4153-A1AA-E6DFE0BDD2C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Domain", "RestApiDDD.Domain\RestApiDDD.Domain.csproj", "{4D4EFE43-FE37-4056-B864-F79286DCEB90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Domain", "RestApiDDD.Domain\RestApiDDD.Domain.csproj", "{4D4EFE43-FE37-4056-B864-F79286DCEB90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Domain.Core", "RestApiDDD.Domain.Core\RestApiDDD.Domain.Core.csproj", "{83A359F8-C7ED-4B50-9C42-768A8EBDA843}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Domain.Core", "RestApiDDD.Domain.Core\RestApiDDD.Domain.Core.csproj", "{83A359F8-C7ED-4B50-9C42-768A8EBDA843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Services", "RestApiDDD.Services\RestApiDDD.Services.csproj", "{873C7FA2-AE64-4F1D-B0EA-FAB5B9AA7DD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Services", "RestApiDDD.Services\RestApiDDD.Services.csproj", "{873C7FA2-AE64-4F1D-B0EA-FAB5B9AA7DD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiDDD.Infrastructure", "RestApiDDD.Infrastructure\RestApiDDD.Infrastructure.csproj", "{A3E23E03-F3E9-4C60-A713-B901252F5981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Infrastructure", "RestApiDDD.Infrastructure\RestApiDDD.Infrastructure.csproj", "{A3E23E03-F3E9-4C60-A713-B901252F5981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

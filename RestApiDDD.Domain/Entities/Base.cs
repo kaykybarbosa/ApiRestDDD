@@ -1,7 +1,9 @@
-﻿namespace RestApiDDD.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RestApiDDD.Domain.Entities
 {
     public class Base
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

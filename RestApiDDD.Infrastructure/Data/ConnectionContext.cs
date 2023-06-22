@@ -14,14 +14,11 @@ namespace RestApiDDD.Infrastructure.Data
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("RegistrationDate") != null))
             {
                 if (entry.State == EntityState.Added)
-                {
                     entry.Property("RegistrationDate").CurrentValue = DateTime.Now;
-                }
 
                 if (entry.State == EntityState.Modified)
-                {
                     entry.Property("RegistrationDate").IsModified = false;
-                }
+                
             }
             return base.SaveChanges();
         }

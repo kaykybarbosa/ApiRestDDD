@@ -7,10 +7,10 @@ namespace RestApiDDD.Services
     public class ServiceClient : ServiceBase<Client>, IServiceClient
     {
         private readonly IRepositoryClient _repositoryClient;
-        public ServiceClient(IRepositoryClient _repositoryClient)
-            :base(_repositoryClient)
+        public ServiceClient(IRepositoryClient repositoryClient)
+            :base(repositoryClient)
         {
-            _repositoryClient = _repositoryClient;
+            _repositoryClient = repositoryClient;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RestApiDDD.Application.DTOs;
+﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Entities;
 
@@ -6,12 +7,11 @@ namespace RestApiDDD.Application.Mappers
 {
     public class MapperClient : IMapperClient
     {
-        public Client MapperDtoToEntity(ClientDto clientDto)
+        public Client MapperDtoToEntity(ClientRequestDTO clientDto)
         {
             var client = new Client()
             {
-                Id = clientDto.Id,
-                Name = clientDto.Name,
+                FirstName = clientDto.FirstName,
                 LastName = clientDto.LastName,
                 Email = clientDto.Email
             };
@@ -19,30 +19,42 @@ namespace RestApiDDD.Application.Mappers
             return client;
         }
 
-        public ClientDto MapperEntityToDto(Client client)
+        public ClientReponseDTO MapperEntityToDto(Client client)
         {
-            var clientDto = new ClientDto()
+            var clientDto = new ClientReponseDTO()
             {
                 Id = client.Id,
-                Name = client.Name,
+                FirstName = client.FirstName,
                 LastName = client.LastName,
-                Email = client.Email
+                Email = client.Email,
+                RegistrationDate = client.RegistrationDate,
+                IsActive = client.IsActive
             };
 
             return clientDto;
         }
 
-        public IEnumerable<ClientDto> MapperListClientDto(IEnumerable<Client> clients)
+        public IEnumerable<ClientReponseDTO> MapperListClientDto(IEnumerable<Client> clients)
         {
-            var clientsDto = clients.Select(c => new ClientDto
+            var clientsDto = clients.Select(c => new ClientReponseDTO
             {
                 Id = c.Id,
-                Name = c.Name,
+                FirstName = c.FirstName,
                 LastName = c.LastName,
-                Email = c.Email
+                Email = c.Email,
+                RegistrationDate = c.RegistrationDate,
+                IsActive = c.IsActive
             });
 
             return clientsDto;
         }
+
+        //public ClientRequestDTO MapperReponseToRequest(ClientReponseDTO clientResponse)
+        //{
+        //    var clientRequest = new ClientRequestDTO()
+        //    {
+
+        //    }
+        //}
     }
 }

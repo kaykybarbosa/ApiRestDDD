@@ -1,4 +1,5 @@
-﻿using RestApiDDD.Application.DTOs;
+﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Core.Interfaces.Services;
@@ -16,31 +17,31 @@ namespace RestApiDDD.Application
             _serviceClient = serviceClient;
             _mapperClient = mapperClient;
         }
-        public void Add(ClientDto clientDto)
+        public void Add(ClientRequestDTO clientDto)
         {
             var client = _mapperClient.MapperDtoToEntity(clientDto);
             _serviceClient.Add(client);
         }
 
-        public void Delete(ClientDto clientDto)
+        public void Delete(ClientRequestDTO clientDto)
         {
             var client = _mapperClient.MapperDtoToEntity(clientDto);
             _serviceClient.Delete(client);
         }
 
-        public IEnumerable<ClientDto> GetAll()
+        public IEnumerable<ClientReponseDTO> GetAll()
         {
             var clients = _serviceClient.GetAll();
             return _mapperClient.MapperListClientDto(clients);
         }
 
-        public ClientDto GetById(Guid id)
+        public ClientReponseDTO GetById(Guid id)
         {
             var client = _serviceClient.GetById(id);
             return _mapperClient.MapperEntityToDto(client);
         }
 
-        public void Update(ClientDto clientDto)
+        public void Update(ClientRequestDTO clientDto)
         {
             var client = _mapperClient.MapperDtoToEntity(clientDto);
             _serviceClient.Update(client);

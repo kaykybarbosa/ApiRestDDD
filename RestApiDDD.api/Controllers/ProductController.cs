@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestApiDDD.Application.DTOs;
+using RestApiDDD.Application.DTOs.Request;
 using RestApiDDD.Application.Interfaces;
 
 namespace RestApiDDD.Api.Controllers
@@ -17,7 +17,7 @@ namespace RestApiDDD.Api.Controllers
 
         [HttpPost]
         [Route("/register-product")]
-        public ActionResult AddProduct([FromBody] ProductDto productDto)
+        public ActionResult AddProduct([FromBody] ProductRequestDTO productDto)
         {
             _applicationServiceProduct.Add(productDto);
 
@@ -26,14 +26,14 @@ namespace RestApiDDD.Api.Controllers
         
         [HttpGet]
         [Route("/show-all-products")]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        public ActionResult<IEnumerable<ProductRequestDTO>> GetAllProducts()
         {
             return Ok(_applicationServiceProduct.GetAll());
         }
 
         [HttpGet]
         [Route("/show-one-product/{id}")]
-        public ActionResult<ProductDto> GetOneProduct(Guid id)
+        public ActionResult<ProductRequestDTO> GetOneProduct(Guid id)
         {
             var product = _applicationServiceProduct.GetById(id);
 
@@ -60,7 +60,7 @@ namespace RestApiDDD.Api.Controllers
         [HttpPut]
         [Route("/update-product/{id}")]
         public ActionResult UpdateProdut(Guid id,
-                                         [FromBody] ProductDto productDto)
+                                         [FromBody] ProductRequestDTO productDto)
         {
             var product = _applicationServiceProduct.GetById(id);
 

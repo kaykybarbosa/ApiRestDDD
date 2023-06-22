@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestApiDDD.Application.DTOs;
+using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 
 namespace RestApiDDD.Api.Controllers
@@ -17,7 +18,9 @@ namespace RestApiDDD.Api.Controllers
       
         [HttpPost]
         [Route("/register-client")]
-        public ActionResult AddClient([FromBody] ClientDto clientDto) 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult AddClient([FromBody] ClientRequestDTO clientDto) 
         {
             _applicationServiceClient.Add(clientDto);
             
@@ -26,21 +29,21 @@ namespace RestApiDDD.Api.Controllers
 
         [HttpGet]
         [Route("/show-all-clients")]
-        public ActionResult<IEnumerable<ClientDto>> GetAllClient()
+        public ActionResult<IEnumerable<ClientReponseDTO>> GetAllClient()
         {
             return Ok(_applicationServiceClient.GetAll());
         }
 
         [HttpGet]
         [Route("/show-one-client/{id}")]
-        public ActionResult<ClientDto> GetOneClient(Guid id)
+        public ActionResult<ClientReponseDTO> GetOneClient(Guid id)
         {
             var client = _applicationServiceClient.GetById(id);
             
             if(client == null)
                 return NotFound("Client by Id not found.");
 
-            return client;
+            return Ok(client);
         }
 
         [HttpDelete]
@@ -60,7 +63,7 @@ namespace RestApiDDD.Api.Controllers
         [HttpPut]
         [Route("/update-client/{id}")]
         public ActionResult UpdateClient(Guid id, 
-                                         [FromBody] ClientDto clientDto)
+                                         [FromBody] ClientRequestDTO clientDto)
         {
             var client = _applicationServiceClient.GetById(id);
 

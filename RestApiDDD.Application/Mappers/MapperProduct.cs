@@ -1,4 +1,4 @@
-﻿using RestApiDDD.Application.DTOs;
+﻿using RestApiDDD.Application.DTOs.Request;
 using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Entities;
 
@@ -6,11 +6,10 @@ namespace RestApiDDD.Application.Mappers
 {
     public class MapperProduct : IMapperProduct
     {
-        public Product MapperDtoToEntity(ProductDto productDto)
+        public Product MapperDtoToEntity(ProductRequestDTO productDto)
         {
             var product = new Product()
             {
-                Id = productDto.Id,
                 Name = productDto.Name,
                 Price = productDto.Price,
             };
@@ -18,11 +17,10 @@ namespace RestApiDDD.Application.Mappers
             return product;
         }
 
-        public ProductDto MapperEntityToDto(Product product)
+        public ProductRequestDTO MapperEntityToDto(Product product)
         {
-            var productDto = new ProductDto()
+            var productDto = new ProductRequestDTO()
             {
-                Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
             };
@@ -30,11 +28,10 @@ namespace RestApiDDD.Application.Mappers
             return productDto;
         }
 
-        public IEnumerable<ProductDto> MapperListProductDto(IEnumerable<Product> products)
+        public IEnumerable<ProductRequestDTO> MapperListProductDto(IEnumerable<Product> products)
         {
-            var productsDto = products.Select(p => new ProductDto
+            var productsDto = products.Select(p => new ProductRequestDTO
             {
-                Id = p.Id,
                 Name = p.Name,
                 Price = p.Price
             });

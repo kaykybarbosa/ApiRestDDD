@@ -1,13 +1,15 @@
-﻿using RestApiDDD.Application.DTOs;
+﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
+using RestApiDDD.Domain.Entities;
 
 namespace RestApiDDD.Application.Interfaces
 {
     public interface IApplicationServiceClient
     {
-        void Add(ClientDto clientDto);
-        void Delete(ClientDto clientDto);
-        void Update(ClientDto clientDto);
-        IEnumerable<ClientDto> GetAll();
-        ClientDto GetById(Guid id);
+        void Add(ClientRequestDTO clientDto);
+        void Delete(ClientRequestDTO client);
+        void Update(ClientRequestDTO clientDto);
+        IEnumerable<ClientReponseDTO> GetAll();
+        ClientReponseDTO GetById(Guid id);
     }
 }

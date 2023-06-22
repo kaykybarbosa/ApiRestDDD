@@ -1,4 +1,4 @@
-﻿using RestApiDDD.Application.DTOs;
+﻿using RestApiDDD.Application.DTOs.Request;
 using RestApiDDD.Application.Interfaces;
 using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Core.Interfaces.Services;
@@ -16,31 +16,31 @@ namespace RestApiDDD.Application
             _serviceProduct = serviceProduct;
             _mapperProduct = mapperProduct;
         }
-        public void Add(ProductDto productDto)
+        public void Add(ProductRequestDTO productDto)
         {
             var product = _mapperProduct.MapperDtoToEntity(productDto);
             _serviceProduct.Add(product);
         }
 
-        public void Delete(ProductDto productDto)
+        public void Delete(ProductRequestDTO productDto)
         {
             var product = _mapperProduct.MapperDtoToEntity(productDto);
             _serviceProduct.Delete(product);
         }
 
-        public IEnumerable<ProductDto> GetAll()
+        public IEnumerable<ProductRequestDTO> GetAll()
         {
             var products = _serviceProduct.GetAll();
             return _mapperProduct.MapperListProductDto(products);
         }
 
-        public ProductDto GetById(Guid id)
+        public ProductRequestDTO GetById(Guid id)
         {
             var product = _serviceProduct.GetById(id);
             return _mapperProduct.MapperEntityToDto(product);
         }
 
-        public void Update(ProductDto productDto)
+        public void Update(ProductRequestDTO productDto)
         {
             var product = _mapperProduct.MapperDtoToEntity(productDto);
             _serviceProduct.Update(product);

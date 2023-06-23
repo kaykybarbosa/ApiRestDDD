@@ -11,14 +11,18 @@ namespace RestApiDDD.Services
             _repositoryBase = repositoryBase;
         }
 
-        public void Add(TEntity entity)
+        public async Task<TEntity> Add(TEntity entity)
         {
-            _repositoryBase.Add(entity);
+            await _repositoryBase.Add(entity);
+            
+            return entity;
         }
 
-        public void Delete(TEntity entity)
+        public async Task<TEntity> Delete(TEntity entity)
         {
-            _repositoryBase.Delete(entity);
+            await _repositoryBase.Delete(entity);
+
+            return entity;
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -26,14 +30,16 @@ namespace RestApiDDD.Services
             return _repositoryBase.GetAll();
         }
 
-        public TEntity GetById(Guid id)
+        public async Task<TEntity> GetById(Guid id)
         {
-            return _repositoryBase.GetById(id);
+            return await _repositoryBase.GetById(id);
         }
 
-        public void Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            _repositoryBase.Update(entity);
+            await _repositoryBase.Update(entity);
+
+            return entity;
         }
     }
 }

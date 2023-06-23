@@ -13,5 +13,12 @@
             Success = success; 
             Error = error;
         }
+
+        public void Update (string? message, bool success, string? error)
+        {
+            Message = message;
+            Success = success;
+            Error = error;
+        }
     }
 }

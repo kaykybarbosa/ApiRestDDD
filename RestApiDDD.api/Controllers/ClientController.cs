@@ -20,59 +20,88 @@ namespace RestApiDDD.Api.Controllers
         [Route("/register-client")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult AddClient([FromBody] ClientRequestDTO clientDto) 
+        public async Task<IActionResult> AddClient([FromBody] ClientRequestDTO clientDto) 
         {
-            _applicationServiceClient.Add(clientDto);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceClient.Add(clientDto);
+
+                if (response.Success)
+                    return Created("Successufully registered.", response);
+                return BadRequest(response);
+            }
             
-            return Ok("Client added successfully.");
+            return StatusCode(500);
         }
 
         [HttpGet]
         [Route("/show-all-clients")]
-        public ActionResult<IEnumerable<ClientReponseDTO>> GetAllClient()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<ClientResponseDTO>> GetAllClient()
         {
-            return Ok(_applicationServiceClient.GetAll());
+            try
+            {
+                var response =  _applicationServiceClient.GetAll();
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
         [Route("/show-one-client/{id}")]
-        public ActionResult<ClientReponseDTO> GetOneClient(Guid id)
+        public ActionResult GetOneClient(Guid id)
         {
-            var client = _applicationServiceClient.GetById(id);
-            
-            if(client == null)
-                return NotFound("Client by Id not found.");
+            if (ModelState.IsValid)
+            {
+                var reponse =  _applicationServiceClient.GetById(id);
+                return Ok(reponse);
+            }
 
-            return Ok(client);
+            return StatusCode(500);
         }
 
         [HttpDelete]
         [Route("/delete-client/{id}")]
-        public ActionResult DeleteClient(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> DeleteClient(Guid id)
         {
-            var client = _applicationServiceClient.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceClient.Delete(id);
+                
+                if(response.Success)
+                    return Ok(response);
+                
+                return BadRequest(response);
+            }
 
-            if (client == null)
-                return NotFound("Client by Id not found.");
-
-            _applicationServiceClient.Delete(client);
-
-            return Ok("Client deleted successfully.");
+            return StatusCode(500);
         }
 
         [HttpPut]
         [Route("/update-client/{id}")]
-        public ActionResult UpdateClient(Guid id, 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> UpdateClient(Guid id, 
                                          [FromBody] ClientRequestDTO clientDto)
         {
-            var client = _applicationServiceClient.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceClient.Update(id, clientDto);
 
-            if (client == null)
-                return NotFound("Client by Id not found.");
+                if (response.Success)
+                    return Ok(response);
 
-            _applicationServiceClient.Update(clientDto);
+                return BadRequest(response);
+            }
 
-            return Ok("Client updating successfully.");
+            return StatusCode(500);
         }
     }
 }

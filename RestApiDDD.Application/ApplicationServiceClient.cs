@@ -1,4 +1,5 @@
 ﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Request.Update;
 using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 using RestApiDDD.Application.Interfaces.Mappers;
@@ -130,11 +131,11 @@ namespace RestApiDDD.Application
             }
         }
 
-        public async Task<BaseResponseDTO> Update(Guid id, ClientRequestDTO clientDto)
+        public async Task<BaseResponseDTO> Update(Guid id, ClientRequestUpdateDTO clientDto)
         {
             try
             {
-                ClientResponseDTO response = new();
+                BaseResponseDTO response = new();
                 var clientFound = await _serviceClient.GetById(id);
 
                 if (clientFound == null)
@@ -144,11 +145,10 @@ namespace RestApiDDD.Application
                 }
                 else
                 {
-                    //var client = _mapperClient.MapperDtoToNewEntity(clientDto);
-
                     clientFound.FirstName = clientDto.FirstName;
                     clientFound.LastName = clientDto.LastName;
                     clientFound.Email = clientDto.Email;
+                    clientFound.IsActive = clientDto.IsActive;
 
                     await _serviceClient.Update(clientFound!);
 

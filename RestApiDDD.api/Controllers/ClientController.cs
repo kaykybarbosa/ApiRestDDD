@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Request.Update;
 using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 
@@ -96,7 +97,7 @@ namespace RestApiDDD.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateClient(Guid id, 
-                                         [FromBody] ClientRequestDTO clientDto)
+                                         [FromBody] ClientRequestUpdateDTO clientDto)
         {
             if (ModelState.IsValid)
             {

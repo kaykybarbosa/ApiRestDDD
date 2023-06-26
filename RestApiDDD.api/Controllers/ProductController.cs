@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Request.Update;
 using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 
@@ -99,7 +100,7 @@ namespace RestApiDDD.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateProdut(Guid id,
-                                         [FromBody] ProductRequestDTO productDto)
+                                         [FromBody] ProductRequestUpdateDTO productDto)
         {
             if (ModelState.IsValid)
             {

@@ -1,4 +1,5 @@
 ﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Request.Update;
 using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 using RestApiDDD.Application.Interfaces.Mappers;
@@ -100,7 +101,7 @@ namespace RestApiDDD.Application
             }
         }
 
-        public async Task<BaseResponseDTO> Update(Guid id, ProductRequestDTO productDto)
+        public async Task<BaseResponseDTO> Update(Guid id, ProductRequestUpdateDTO productDto)
         {
             try
             {
@@ -116,6 +117,7 @@ namespace RestApiDDD.Application
                 {
                     product.Name = productDto.Name;
                     product.Price = productDto.Price;
+                    product.IsAvaiable = productDto.IsAvaiable;
 
                     await _serviceProduct.Update(product);
 

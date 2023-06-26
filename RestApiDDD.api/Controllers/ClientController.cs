@@ -19,7 +19,7 @@ namespace RestApiDDD.Api.Controllers
         [HttpPost]
         [Route("/register-client")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddClient([FromBody] ClientRequestDTO clientDto) 
         {
             if (ModelState.IsValid)
@@ -28,6 +28,7 @@ namespace RestApiDDD.Api.Controllers
 
                 if (response.Success)
                     return Created("Successufully registered.", response);
+                
                 return BadRequest(response);
             }
             
@@ -37,7 +38,7 @@ namespace RestApiDDD.Api.Controllers
         [HttpGet]
         [Route("/show-all-clients")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<IEnumerable<ClientResponseDTO>> GetAllClient()
         {
             try
@@ -54,12 +55,18 @@ namespace RestApiDDD.Api.Controllers
 
         [HttpGet]
         [Route("/show-one-client/{id}")]
-        public ActionResult GetOneClient(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetOneClient(Guid id)
         {
             if (ModelState.IsValid)
             {
-                var reponse =  _applicationServiceClient.GetById(id);
-                return Ok(reponse);
+                var response = await _applicationServiceClient.GetById(id);
+
+                if(response.Success)
+                    return Ok(response);
+
+                return BadRequest(response);
             }
 
             return StatusCode(500);

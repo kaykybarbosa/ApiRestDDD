@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 
 namespace RestApiDDD.Api.Controllers
@@ -17,59 +18,100 @@ namespace RestApiDDD.Api.Controllers
 
         [HttpPost]
         [Route("/register-product")]
-        public ActionResult AddProduct([FromBody] ProductRequestDTO productDto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddProduct([FromBody] ProductRequestDTO productDto)
         {
-            _applicationServiceProduct.Add(productDto);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceProduct.Add(productDto);
 
-            return Ok("Product Added successfully.");
+                if (response.Success)
+                    return Created("Successfully registered.", response);
+
+                return BadRequest(response);
+            }
+
+            return StatusCode(500);
         }
         
         [HttpGet]
         [Route("/show-all-products")]
-        public ActionResult<IEnumerable<ProductRequestDTO>> GetAllProducts()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<ProductResponseDTO>> GetAllProducts()
         {
-            return Ok(_applicationServiceProduct.GetAll());
+            try
+            {
+                var response = _applicationServiceProduct.GetAll();
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
         [Route("/show-one-product/{id}")]
-        public ActionResult<ProductRequestDTO> GetOneProduct(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetOneProduct(Guid id)
         {
-            var product = _applicationServiceProduct.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceProduct.GetById(id);
 
-            if (product == null)
-                return NotFound("Product by Id not found.");
+                if (response.Success)
+                    return Ok(response);
 
-            return Ok(product);
+                return BadRequest(response);   
+
+            }
+
+            return StatusCode(500);
         }
 
         [HttpDelete]
         [Route("/delete-product/{id}")]
-        public ActionResult DeleteProduct(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteProduct(Guid id)
         {
-            var product = _applicationServiceProduct.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceProduct.Delete(id);
 
-            if (product == null)
-                return NotFound("Product by Id not found");
+                if (response.Success)
+                    return Ok(response);
 
-            _applicationServiceProduct.Delete(product);
+                return BadRequest(response);
 
-            return Ok("Product deleted successfully.");
+            }
+
+            return StatusCode(500);
         }
 
         [HttpPut]
         [Route("/update-product/{id}")]
-        public ActionResult UpdateProdut(Guid id,
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateProdut(Guid id,
                                          [FromBody] ProductRequestDTO productDto)
         {
-            var product = _applicationServiceProduct.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var response = await _applicationServiceProduct.Update(id, productDto);
 
-            if (product == null)
-                return NotFound("Product by Id not found.");
-            
-            _applicationServiceProduct.Update(productDto);
+                if (response.Success)
+                    return Ok(response);
 
-            return Ok("Product updating successfully.");
+                return BadRequest(response);
+            }
+
+            return StatusCode(500);
         }
     }
 }

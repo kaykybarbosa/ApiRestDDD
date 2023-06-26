@@ -22,23 +22,13 @@ namespace RestApiDDD.Application
             try
             {
                 var client = _mapperClient.MapperDtoToEntity(clientDto);
-                
                 await _serviceClient.Add(client!);
 
-                return new BaseResponseDTO()
-                {
-                    Message = "Client added successfully.",
-                    Success = true
-                };
+                return new BaseResponseDTO(message: "Client added successfully.", success: true);
             }
             catch (Exception e)
             {
-                return new BaseResponseDTO()
-                {
-                    Message = "Error while saving client.",
-                    Success = false,
-                    Error = e.Message
-                };
+                return new BaseResponseDTO(message: "Error while saving client.", success: false, error: e.Message);
             }
         }
 
@@ -46,8 +36,8 @@ namespace RestApiDDD.Application
         {
             try
             {
-                var client = _serviceClient.GetById(id);
                 BaseResponseDTO response = new();
+                var client = _serviceClient.GetById(id);
 
                 if(client == null) 
                 {
@@ -66,12 +56,7 @@ namespace RestApiDDD.Application
             }
             catch (Exception e)
             {
-                return new BaseResponseDTO()
-                {
-                    Message = "Error while deleting client.",
-                    Success = false,
-                    Error = e.Message
-                };
+                return new BaseResponseDTO(message: "Error while deleting client.", success: false, error: e.Message);
             }
         }
 
@@ -86,32 +71,29 @@ namespace RestApiDDD.Application
         {
             try
             {
+                ClientResponseDTO response = new();
                 var clientFound = await _serviceClient.GetById(id);
 
-                if (clientFound == null)
-                    return new ClientResponseDTO()
-                    {
-                        Message = "Cliend by Id not found",
-                        Success = false
-                    };
-
-                return new ClientResponseDTO()
+                if (clientFound == null) { 
+                    response.Message = "Cliend by Id not found";
+                    response.Success = false;
+                }
+                else 
                 {
-                    Id = clientFound.Id,
-                    FirstName = clientFound.FirstName,
-                    LastName = clientFound.LastName,
-                    Email = clientFound.Email,
-                    RegistrationDate = clientFound.RegistrationDate,
-                    IsActive = clientFound.IsActive,
-                    Message = "Found successfully.",
-                    Success = true
-                };
+                    response.Id = clientFound.Id;
+                    response.FirstName = clientFound.FirstName;
+                    response.LastName = clientFound.LastName;
+                    response.Email = clientFound.Email;
+                    response.RegistrationDate = clientFound.RegistrationDate;
+                    response.IsActive = clientFound.IsActive;
+                    response.Message = "Found successfully.";
+                    response.Success = true;
+                }
 
-
+                return response;
             }
             catch (Exception e)
             {
-
                 return new ClientResponseDTO()
                 {
                     Message = "Error occurred while fetching the client.",
@@ -121,40 +103,34 @@ namespace RestApiDDD.Application
             }
         }
 
-        public async Task<ClientResponseDTO> Update(Guid id, ClientRequestDTO clientDto)
+        public async Task<BaseResponseDTO> Update(Guid id, ClientRequestDTO clientDto)
         {
             try
             {
+                ClientResponseDTO response = new();
                 var clientFound = await _serviceClient.GetById(id);
-                
-                if(clientFound == null)
+
+                if (clientFound == null)
                 {
-                    return new ClientResponseDTO()
-                    {
-                        Message = "Client by Id not found.",
-                        Success = false
-                    };
+                    response.Message = "Client by Id not found.";
+                    response.Success = false;
+                }
+                else
+                {
+                    //var client = _mapperClient.MapperDtoToNewEntity(clientDto);
+
+                    clientFound.FirstName = clientDto.FirstName;
+                    clientFound.LastName = clientDto.LastName;
+                    clientFound.Email = clientDto.Email;
+
+                    await _serviceClient.Update(clientFound!);
+
+                    response.Message = "Client updating successfully.";
+                    response.Success = true;
                 }
 
-                //var client = _mapperClient.MapperDtoToNewEntity(clientDto);
+                return response;
 
-                clientFound.FirstName = clientDto.FirstName;
-                clientFound.LastName = clientDto.LastName;
-                clientFound.Email = clientDto.Email;
-
-                await _serviceClient.Update(clientFound!);
-
-                return new ClientResponseDTO()
-                {
-                    Id = clientFound.Id,
-                    FirstName = clientFound.FirstName,
-                    LastName = clientFound.LastName,
-                    Email = clientFound.Email,
-                    RegistrationDate =  clientFound.RegistrationDate,
-                    IsActive = clientFound.IsActive,
-                    Message = "Client updating successfully.",
-                    Success = true
-                };
             }
             catch (Exception e)
             {

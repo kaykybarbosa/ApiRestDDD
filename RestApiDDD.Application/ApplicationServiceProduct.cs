@@ -1,4 +1,5 @@
 ﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 using RestApiDDD.Application.Interfaces;
 using RestApiDDD.Application.Interfaces.Mappers;
 using RestApiDDD.Domain.Core.Interfaces.Services;
@@ -16,34 +17,123 @@ namespace RestApiDDD.Application
             _serviceProduct = serviceProduct;
             _mapperProduct = mapperProduct;
         }
-        public void Add(ProductRequestDTO productDto)
+        public async Task<BaseResponseDTO> Add(ProductRequestDTO productDto)
         {
-            var product = _mapperProduct.MapperDtoToEntity(productDto);
-            _serviceProduct.Add(product);
+            try
+            {
+                var product = _mapperProduct.MapperDtoToEntity(productDto);
+                await _serviceProduct.Add(product);
+
+                return new BaseResponseDTO(message: "Product added successfully.", success: true);
+            }
+            catch (Exception e)
+            {
+                return new BaseResponseDTO(message: "Error while saving product.", success: false, error: e.Message) ;
+            }
         }
 
-        public void Delete(ProductRequestDTO productDto)
+        public async Task<BaseResponseDTO> Delete(Guid id)
         {
-            var product = _mapperProduct.MapperDtoToEntity(productDto);
-            _serviceProduct.Delete(product);
+            try
+            {
+                BaseResponseDTO response = new();
+                var product = _serviceProduct.GetById(id);
+
+                if (product == null) {
+                    response.Message = "Product by Id not found.";
+                    response.Success = false; 
+                }
+                else { 
+                    await _serviceProduct.Delete(product.Result);
+
+                    response.Message = "Product deleted successfully.";
+                    response.Success = true; 
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                return new BaseResponseDTO(message: "Erro while deleting product.", success: false, error: e.Message);
+            }
         }
 
-        public IEnumerable<ProductRequestDTO> GetAll()
+        public IEnumerable<ProductResponseDTO> GetAll()
         {
             var products = _serviceProduct.GetAll();
+
             return _mapperProduct.MapperListProductDto(products);
         }
 
-        public ProductRequestDTO GetById(Guid id)
+        public async Task<ProductResponseDTO> GetById(Guid id)
         {
-            var product = _serviceProduct.GetById(id);
-            return _mapperProduct.MapperEntityToDto(product);
+            try
+            {
+                ProductResponseDTO response = new();
+                var product = await _serviceProduct.GetById(id);
+                
+                if (product == null)
+                {
+                    response.Message = "Product by Id not found.";
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Id = product.Id;
+                    response.Name = product.Name;
+                    response.Price = product.Price;
+                    response.IsAvaiable = product.IsAvaiable;
+                    response.Message = "Found successfully.";
+                    response.Success = true;
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                return new ProductResponseDTO()
+                {
+                    Message = "Error while fetching the client.",
+                    Success = false,
+                    Error = e.Message
+                };
+            }
         }
 
-        public void Update(ProductRequestDTO productDto)
+        public async Task<BaseResponseDTO> Update(Guid id, ProductRequestDTO productDto)
         {
-            var product = _mapperProduct.MapperDtoToEntity(productDto);
-            _serviceProduct.Update(product);
+            try
+            {
+                BaseResponseDTO response = new();
+                var product = await _serviceProduct.GetById(id);
+
+                if(product == null)
+                {
+                    response.Message = "Product by Id not found.";
+                    response.Success = false;
+                }
+                else
+                {
+                    product.Name = productDto.Name;
+                    product.Price = productDto.Price;
+
+                    await _serviceProduct.Update(product);
+
+                    response.Message = "Product updating successfully.";
+                    response.Success = true;
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                return new BaseResponseDTO()
+                {
+                    Message = "Error while updating product.",
+                    Success = false,
+                    Error = e.Message
+                };
+            }
         }
     }
 }

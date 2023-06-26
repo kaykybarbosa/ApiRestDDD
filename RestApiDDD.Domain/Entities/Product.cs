@@ -6,7 +6,7 @@ namespace RestApiDDD.Domain.Entities
     public class Product : Base
     {
         [Required]
-        [StringLength(100, MinimumLength = 5)]
+        [StringLength(50, MinimumLength = 5)]
         public string Name { get; set; }
         [Required]
         [Column(TypeName = "decimal(18, 0)")]

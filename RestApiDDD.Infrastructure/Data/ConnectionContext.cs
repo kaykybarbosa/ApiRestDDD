@@ -15,11 +15,13 @@ namespace RestApiDDD.Infrastructure.Data
             {
                 if (entry.State == EntityState.Added)
                     entry.Property("RegistrationDate").CurrentValue = DateTime.Now;
+                    entry.Property("IsActive").CurrentValue = true;
+                    entry.Property("IsAvaiable").CurrentValue = true;
 
                 if (entry.State == EntityState.Modified)
                     entry.Property("RegistrationDate").IsModified = false;
-                
             }
+
             return base.SaveChanges();
         }
     }

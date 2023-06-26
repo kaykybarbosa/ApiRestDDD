@@ -24,9 +24,7 @@ namespace RestApiDDD.Infrastructure.Data.Repositories
             return entity;
         }
         public IEnumerable<TEntity> GetAll() => _context.Set<TEntity>().ToList();
-
         public async Task<TEntity?> GetById(Guid id) => _context.Set<TEntity>().Find(id);
-
         public async Task<TEntity> Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;

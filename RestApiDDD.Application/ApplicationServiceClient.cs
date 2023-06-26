@@ -21,17 +21,26 @@ namespace RestApiDDD.Application
         {
             try
             {
-                var client = _mapperClient.MapperDtoToEntity(clientDto);
-                await _serviceClient.Add(client!);
+                var emailNoExist = GetByEmail(clientDto.Email);
 
-                return new BaseResponseDTO(message: "Client added successfully.", success: true);
+                if(emailNoExist.Success)
+                {
+                    var client = _mapperClient.MapperDtoToEntity(clientDto);
+                    await _serviceClient.Add(client!);
+
+                    return new BaseResponseDTO(message: "Client added successfully.", success: true);
+                }
+                else
+                {
+                    return emailNoExist;
+                }
             }
             catch (Exception e)
             {
                 return new BaseResponseDTO(message: "Error while saving client.", success: false, error: e.Message);
             }
         }
-
+        
         public async Task<BaseResponseDTO> Delete(Guid id)
         {
             try
@@ -41,7 +50,7 @@ namespace RestApiDDD.Application
 
                 if(client == null) 
                 {
-                    response.Message = "Client by Id not found.";
+                    response.Message = "Client with this Id not found.";
                     response.Success = false;
                 }
                 else
@@ -67,6 +76,24 @@ namespace RestApiDDD.Application
             return _mapperClient.MapperListClientDto(clients);
         }
 
+        public BaseResponseDTO GetByEmail(string? email)
+        {
+            BaseResponseDTO response = new();
+            var clientExist = _serviceClient.GetAll().FirstOrDefault(e => e.Email == email.Trim());
+
+            if (clientExist == null)
+            {
+                response.Success = true;
+            }
+            else
+            {
+                response.Message = "Client with this Email already exists.";
+                response.Success = false;
+            }
+
+            return response;
+        }
+
         public async Task<ClientResponseDTO> GetById(Guid id)
         {
             try
@@ -75,7 +102,7 @@ namespace RestApiDDD.Application
                 var clientFound = await _serviceClient.GetById(id);
 
                 if (clientFound == null) { 
-                    response.Message = "Cliend by Id not found";
+                    response.Message = "Cliend with this Id not found";
                     response.Success = false;
                 }
                 else 
@@ -112,7 +139,7 @@ namespace RestApiDDD.Application
 
                 if (clientFound == null)
                 {
-                    response.Message = "Client by Id not found.";
+                    response.Message = "Client bywith this Id not found.";
                     response.Success = false;
                 }
                 else

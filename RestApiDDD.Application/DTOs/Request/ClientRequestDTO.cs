@@ -12,6 +12,7 @@ namespace RestApiDDD.Application.DTOs.Request
         [Required(ErrorMessage = "Post LastName is required.")]
         public string? LastName { get; set; }
 
+        [EmailAddress]
         [StringLength(30, MinimumLength = 12)]
         [Required(ErrorMessage = "Post Email is required.")]
         public string? Email { get; set; }

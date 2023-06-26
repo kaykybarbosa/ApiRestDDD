@@ -1,13 +1,14 @@
 ﻿using RestApiDDD.Application.DTOs.Request;
+using RestApiDDD.Application.DTOs.Response;
 
 namespace RestApiDDD.Application.Interfaces
 {
     public interface IApplicationServiceProduct
     {
-        void Add(ProductRequestDTO productDto);
-        void Delete(ProductRequestDTO productDto);
-        void Update(ProductRequestDTO productDto);
-        IEnumerable<ProductRequestDTO> GetAll();
-        ProductRequestDTO GetById(Guid id);
+        Task<BaseResponseDTO> Add(ProductRequestDTO productDto);
+        Task<BaseResponseDTO> Delete(Guid id);
+        Task<BaseResponseDTO> Update(Guid id, ProductRequestDTO productDto);
+        IEnumerable<ProductResponseDTO> GetAll();
+        Task<ProductResponseDTO> GetById(Guid id);
     }
 }

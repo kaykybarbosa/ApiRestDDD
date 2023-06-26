@@ -19,9 +19,9 @@ namespace RestApiDDD.Application.Mappers
             return client;
         }
 
-        public ClientReponseDTO MapperEntityToDto(Client client)
+        public ClientResponseDTO MapperEntityToDto(Client client)
         {
-            var clientDto = new ClientReponseDTO()
+            var clientDto = new ClientResponseDTO()
             {
                 Id = client.Id,
                 FirstName = client.FirstName,
@@ -34,9 +34,9 @@ namespace RestApiDDD.Application.Mappers
             return clientDto;
         }
 
-        public IEnumerable<ClientReponseDTO> MapperListClientDto(IEnumerable<Client> clients)
+        public IEnumerable<ClientResponseDTO> MapperListClientDto(IEnumerable<Client> clients)
         {
-            var clientsDto = clients.Select(c => new ClientReponseDTO
+            var clientsDto = clients.Select(c => new ClientResponseDTO
             {
                 Id = c.Id,
                 FirstName = c.FirstName,
@@ -48,13 +48,5 @@ namespace RestApiDDD.Application.Mappers
 
             return clientsDto;
         }
-
-        //public ClientRequestDTO MapperReponseToRequest(ClientReponseDTO clientResponse)
-        //{
-        //    var clientRequest = new ClientRequestDTO()
-        //    {
-
-        //    }
-        //}
     }
 }

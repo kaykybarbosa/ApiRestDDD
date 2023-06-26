@@ -7,7 +7,7 @@ namespace RestApiDDD.Application.Interfaces
     {
         Task<BaseResponseDTO> Add(ClientRequestDTO clientDto);
         Task<BaseResponseDTO> Delete(Guid id);
-        Task<ClientResponseDTO> Update(Guid id, ClientRequestDTO clientDto);
+        Task<BaseResponseDTO> Update(Guid id, ClientRequestDTO clientDto);
         IEnumerable<ClientResponseDTO> GetAll();
         Task<ClientResponseDTO> GetById(Guid id);
     }

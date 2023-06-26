@@ -5,7 +5,7 @@ namespace RestApiDDD.Application.DTOs.Request
 {
     public class ProductRequestDTO
     {
-        [StringLength(100, MinimumLength = 5)]
+        [StringLength(50, MinimumLength = 5)]
         [Required(ErrorMessage = "Post Name is required.")]
         public string? Name { get; set; }
 

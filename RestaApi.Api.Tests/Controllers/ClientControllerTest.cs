@@ -49,8 +49,6 @@ namespace RestaApi.Api.Tests.Controllers
         public async Task ClientController_GetAllClient_ReturnOkResult()
         {
             //Arrange
-            var client = A.Fake<ClientResponseDTO>();
-
             var listClient = A.Fake<IEnumerable<ClientResponseDTO>>();
 
             A.CallTo(() => _applicationServiceClient.GetAll())

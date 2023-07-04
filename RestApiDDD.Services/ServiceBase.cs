@@ -25,9 +25,9 @@ namespace RestApiDDD.Services
             return entity;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return _repositoryBase.GetAll();
+            return await _repositoryBase.GetAll();
         }
 
         public async Task<TEntity> GetById(Guid id)

@@ -59,9 +59,9 @@ namespace RestApiDDD.Application
             }
         }
 
-        public IEnumerable<ProductResponseDTO> GetAll()
+        public async Task<IEnumerable<ProductResponseDTO>> GetAll()
         {
-            var products = _serviceProduct.GetAll();
+            var products = await _serviceProduct.GetAll();
 
             return _mapperProduct.MapperListProductDto(products);
         }

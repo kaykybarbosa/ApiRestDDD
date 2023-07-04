@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Rest API Model DDD", Version = "v1" });
 });
 
-//Configure Dependency Inject
+//Add Service to the container
 builder.Services.AddScoped<IApplicationServiceClient, ApplicationServiceClient>();
 builder.Services.AddScoped<IApplicationServiceProduct, ApplicationServiceProduct>();
 builder.Services.AddScoped<IServiceClient, ServiceClient>();

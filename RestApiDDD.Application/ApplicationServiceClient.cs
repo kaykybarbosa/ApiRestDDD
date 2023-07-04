@@ -70,17 +70,19 @@ namespace RestApiDDD.Application
             }
         }
 
-        public IEnumerable<ClientResponseDTO> GetAll()
+        public async Task<IEnumerable<ClientResponseDTO>> GetAll()
         {
-            var clients = _serviceClient.GetAll();
+            var clients = await _serviceClient.GetAll();
 
             return _mapperClient.MapperListClientDto(clients);
         }
 
-        public BaseResponseDTO GetByEmail(string? email)
+        public BaseResponseDTO GetByEmail(string email)
         {
             BaseResponseDTO response = new();
-            var clientExist = _serviceClient.GetAll().FirstOrDefault(e => e.Email == email.Trim());
+            //var clientExist =  _serviceClient.GetAll().FirstOrDefault(e => e.Email == email.Trim());
+            var clientExist = _serviceClient.GetAll().Result.Where(e => e.Email == email.Trim());
+
 
             if (clientExist == null)
             {

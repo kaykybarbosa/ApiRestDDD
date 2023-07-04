@@ -40,11 +40,11 @@ namespace RestApiDDD.Api.Controllers
         [Route("/show-all-clients")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<ClientResponseDTO>> GetAllClient()
+        public async Task<IActionResult> GetAllClient()
         {
             try
             {
-                var response =  _applicationServiceClient.GetAll();
+                var response =  await _applicationServiceClient.GetAll();
 
                 return Ok(response);
             }
@@ -58,7 +58,7 @@ namespace RestApiDDD.Api.Controllers
         [Route("/show-one-client/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> GetOneClient(Guid id)
+        public async Task<IActionResult> GetOneClient(Guid id)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace RestApiDDD.Api.Controllers
         [Route("/delete-client/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> DeleteClient(Guid id)
+        public async Task<IActionResult> DeleteClient(Guid id)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace RestApiDDD.Api.Controllers
         [Route("/update-client/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateClient(Guid id, 
+        public async Task<IActionResult> UpdateClient(Guid id, 
                                          [FromBody] ClientRequestUpdateDTO clientDto)
         {
             if (ModelState.IsValid)

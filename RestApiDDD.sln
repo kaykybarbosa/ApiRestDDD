@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Services", "Rest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiDDD.Infrastructure", "RestApiDDD.Infrastructure\RestApiDDD.Infrastructure.csproj", "{A3E23E03-F3E9-4C60-A713-B901252F5981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaApi.Api.Tests", "RestaApi.Api.Tests\RestaApi.Api.Tests.csproj", "{CCE50A7B-B2DB-489B-9A34-15007BE5354A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A3E23E03-F3E9-4C60-A713-B901252F5981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E23E03-F3E9-4C60-A713-B901252F5981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E23E03-F3E9-4C60-A713-B901252F5981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE50A7B-B2DB-489B-9A34-15007BE5354A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE50A7B-B2DB-489B-9A34-15007BE5354A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE50A7B-B2DB-489B-9A34-15007BE5354A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE50A7B-B2DB-489B-9A34-15007BE5354A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

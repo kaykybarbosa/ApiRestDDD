@@ -6,7 +6,7 @@ namespace RestApiDDD.Domain.Entities
     {
      
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         public Base()
         {
             Id = Guid.NewGuid();

@@ -9,7 +9,7 @@ namespace RestApiDDD.Application.Interfaces
         Task<BaseResponseDTO> Add(ClientRequestDTO clientDto);
         Task<BaseResponseDTO> Delete(Guid id);
         Task<BaseResponseDTO> Update(Guid id, ClientRequestUpdateDTO clientDto);
-        IEnumerable<ClientResponseDTO> GetAll();
+        Task<IEnumerable<ClientResponseDTO>> GetAll();
         Task<ClientResponseDTO> GetById(Guid id);
         BaseResponseDTO GetByEmail(string email);
     }

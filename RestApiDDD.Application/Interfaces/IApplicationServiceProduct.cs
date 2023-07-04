@@ -9,7 +9,7 @@ namespace RestApiDDD.Application.Interfaces
         Task<BaseResponseDTO> Add(ProductRequestDTO productDto);
         Task<BaseResponseDTO> Delete(Guid id);
         Task<BaseResponseDTO> Update(Guid id, ProductRequestUpdateDTO productDto);
-        IEnumerable<ProductResponseDTO> GetAll();
+        Task<IEnumerable<ProductResponseDTO>> GetAll();
         Task<ProductResponseDTO> GetById(Guid id);
     }
 }

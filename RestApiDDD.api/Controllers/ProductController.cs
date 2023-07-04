@@ -40,11 +40,11 @@ namespace RestApiDDD.Api.Controllers
         [Route("/show-all-products")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<ProductResponseDTO>> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts()
         {
             try
             {
-                var response = _applicationServiceProduct.GetAll();
+                var response = await _applicationServiceProduct.GetAll();
 
                 return Ok(response);
             }

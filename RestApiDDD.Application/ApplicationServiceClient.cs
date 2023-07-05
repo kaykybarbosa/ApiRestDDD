@@ -20,7 +20,7 @@ namespace RestApiDDD.Application
         }
         public async Task<BaseResponseDTO> Add(ClientRequestDTO clientDto)
         {
-            try
+            try 
             {
                 var emailNoExist = GetByEmail(clientDto.Email);
 
@@ -80,7 +80,6 @@ namespace RestApiDDD.Application
         public BaseResponseDTO GetByEmail(string email)
         {
             BaseResponseDTO response = new();
-            //var clientExist =  _serviceClient.GetAll().FirstOrDefault(e => e.Email == email.Trim());
             var clientExist = _serviceClient.GetAll().Result.Where(e => e.Email == email.Trim());
 
 

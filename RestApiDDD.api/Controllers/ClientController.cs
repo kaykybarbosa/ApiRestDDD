@@ -44,7 +44,7 @@ namespace RestApiDDD.Api.Controllers
         {
             try
             {
-                var response =  await _applicationServiceClient.GetAll();
+                var response = await _applicationServiceClient.GetAll();
 
                 return Ok(response);
             }
@@ -67,7 +67,7 @@ namespace RestApiDDD.Api.Controllers
                 if(response.Success)
                     return Ok(response);
 
-                return BadRequest(response);
+                return NotFound(response);
             }
 
             return StatusCode(500);
@@ -77,6 +77,7 @@ namespace RestApiDDD.Api.Controllers
         [Route("/delete-client/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteClient(Guid id)
         {
             if (ModelState.IsValid)
@@ -96,6 +97,7 @@ namespace RestApiDDD.Api.Controllers
         [Route("/update-client/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateClient(Guid id, 
                                          [FromBody] ClientRequestUpdateDTO clientDto)
         {

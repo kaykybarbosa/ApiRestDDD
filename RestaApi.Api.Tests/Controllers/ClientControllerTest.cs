@@ -1,7 +1,5 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RestApiDDD.Api.Controllers;
 using RestApiDDD.Application.DTOs.Request;
@@ -27,19 +25,19 @@ namespace RestaApi.Api.Tests.Controllers
         public async Task ClientController_AddClient_ReturnCreated()
         {
             //Arrange
-            var clientResquest = A.Fake<ClientRequestDTO>();
+            var client = A.Fake<ClientRequestDTO>();
 
             BaseResponseDTO response = new()
             {
-                Message = "Client added successfully.",
+                Message = "Successfully registered.",
                 Success = true,
             };
 
-            A.CallTo(() => _applicationServiceClient.Add(clientResquest))
+            A.CallTo(() => _applicationServiceClient.Add(A<ClientRequestDTO>.Ignored))
                 .Returns(Task.FromResult(response));
 
             //Act
-            var result = await _clientController.AddClient(clientResquest);
+            var result = await _clientController.AddClient(client);
 
             //Assert
             result.Should().NotBeNull();
@@ -51,28 +49,28 @@ namespace RestaApi.Api.Tests.Controllers
         public async Task ClientController_AddClient_ReturnBadRequest()
         {
             //Arrange
-            var clientInexistent = A.Fake<ClientRequestDTO>();
+            var clientInvalid = A.Fake<ClientRequestDTO>();
 
             var error = A.Fake<Exception>();
 
             BaseResponseDTO response = new()
             {
-                Message = "Error while saving client.",
+                Message = "Message.",
                 Success = false,
                 Error = error.Message
             };
 
-            A.CallTo(() => _applicationServiceClient.Add(clientInexistent)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceClient.Add(A<ClientRequestDTO>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
-            var result = await _clientController.AddClient(clientInexistent);
+            var result = await _clientController.AddClient(clientInvalid);
 
             //Assert
             result.Should().BeOfType<BadRequestObjectResult>().Which.StatusCode.Should().Be(400);
         }
 
         [Fact]
-        public async Task ClientController_GetAllClient_ReturnSuccess()
+        public async Task ClientController_GetAllClient_ReturnOKResult()
         {
             //Arrange
             var listClient = A.Fake<IEnumerable<ClientResponseDTO>>();
@@ -90,7 +88,7 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ClientController_GetOneClient_ReturnSuccess()
+        public async Task ClientController_GetOneClient_ReturnOkResult()
         {
             //Arrange
             var client = A.Fake<Client>();
@@ -103,9 +101,11 @@ namespace RestaApi.Api.Tests.Controllers
                 Email = client.Email,
                 RegistrationDate = client.RegistrationDate,
                 IsActive = client.IsActive,
+                Message = "Message.",
+                Success = true
             };
 
-            A.CallTo(() => _applicationServiceClient.GetById(client.Id))
+            A.CallTo(() => _applicationServiceClient.GetById(A<Guid>.Ignored))
                 .Returns(Task.FromResult(response));
 
             //Act
@@ -123,13 +123,16 @@ namespace RestaApi.Api.Tests.Controllers
             //Arrange 
             var idInexistent = Guid.NewGuid();
 
+            var error = A.Fake<Exception>();
+
             ClientResponseDTO response = new()
             {
-                Message = "Client by Id not found.",
+                Message = "Message.",
                 Success = false,
+                Error = error.Message
             };
 
-            A.CallTo(() => _applicationServiceClient.GetById(idInexistent)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceClient.GetById(A<Guid>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _clientController.GetOneClient(idInexistent);
@@ -139,22 +142,22 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ClientController_DeleteClient_ReturnSuccess()
+        public async Task ClientController_DeleteClient_ReturnOkResult()
         {
             //Arrange
-            var client = A.Fake<Client>();
+            var id = Guid.NewGuid();
 
             BaseResponseDTO response = new()
             {
-                Message = "Client deleted successfully.",
+                Message = "Message.",
                 Success = true
             };
 
-            A.CallTo(() => _applicationServiceClient.Delete(client.Id))
+            A.CallTo(() => _applicationServiceClient.Delete(A<Guid>.Ignored))
                 .Returns(Task.FromResult(response));
 
             //Act
-            var result = await _clientController.DeleteClient(client.Id);
+            var result = await _clientController.DeleteClient(id);
 
             //Assert
             result.Should().NotBeNull();
@@ -172,12 +175,12 @@ namespace RestaApi.Api.Tests.Controllers
 
             BaseResponseDTO response = new()
             {
-                Message = "Error while deleting client",
+                Message = "Message.",
                 Success = false,
                 Error = error.Message
             };
 
-            A.CallTo(() => _applicationServiceClient.Delete(idInvalid)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceClient.Delete(A<Guid>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _clientController.DeleteClient(idInvalid);
@@ -187,7 +190,7 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ClientController_UpdateClient_ReturnSuccess()
+        public async Task ClientController_UpdateClient_ReturnOkResult()
         {
             //Arrange
             var id = Guid.NewGuid();
@@ -196,11 +199,11 @@ namespace RestaApi.Api.Tests.Controllers
 
             BaseResponseDTO response = new()
             {
-                Message = "Client updating successfully.",
+                Message = "Message.",
                 Success = true
             };
 
-            A.CallTo(() => _applicationServiceClient.Update(id, client))
+            A.CallTo(() => _applicationServiceClient.Update(A<Guid>.Ignored, A<ClientRequestUpdateDTO>.Ignored))
                 .Returns(Task.FromResult(response));
 
             //Act
@@ -224,12 +227,12 @@ namespace RestaApi.Api.Tests.Controllers
 
             BaseResponseDTO response = new()
             {
-                Message = "Error while updating client.",
+                Message = "Message.",
                 Success = false,
                 Error = error.Message
             };
 
-            A.CallTo(() => _applicationServiceClient.Update(idInvalid, clientInvalid)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceClient.Update(A<Guid>.Ignored, A<ClientRequestUpdateDTO>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _clientController.UpdateClient(idInvalid, clientInvalid);

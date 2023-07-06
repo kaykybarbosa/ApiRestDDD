@@ -68,7 +68,7 @@ namespace RestApiDDD.Api.Controllers
                 if (response.Success)
                     return Ok(response);
 
-                return BadRequest(response);   
+                return NotFound(response);   
 
             }
 
@@ -88,7 +88,7 @@ namespace RestApiDDD.Api.Controllers
                 if (response.Success)
                     return Ok(response);
 
-                return BadRequest(response);
+                return NotFound(response);
 
             }
 

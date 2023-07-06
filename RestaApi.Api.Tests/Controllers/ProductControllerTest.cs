@@ -28,11 +28,11 @@ namespace RestaApi.Api.Tests.Controllers
 
             BaseResponseDTO response = new()
             {
-                Message = "Product added successfully.",
+                Message = "Successfully registered.",
                 Success = true,
             };
 
-            A.CallTo(() => _applicationServiceProduct.Add(client)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceProduct.Add(A<ProductRequestDTO>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _productController.AddProduct(client);
@@ -43,7 +43,31 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ProductController_GetAllProduct_ReturnSuccess()
+        public async Task ProductController_AddProduct_ReturnBadRequest()
+        {
+            //Arrange
+            var productInvalid = A.Fake<ProductRequestDTO>();
+
+            var error = A.Fake<Exception>();
+
+            BaseResponseDTO response = new() 
+            {
+                Message = "Message.",
+                Success = false,
+                Error = error.Message
+            };
+
+            A.CallTo(() => _applicationServiceProduct.Add(A<ProductRequestDTO>.Ignored)).Returns(Task.FromResult(response));
+
+            //Act
+            var result = await _productController.AddProduct(productInvalid);
+
+            //Assert
+            result.Should().BeOfType<BadRequestObjectResult>().Which.StatusCode.Should().Be(400);
+        }
+
+        [Fact]
+        public async Task ProductController_GetAllProduct_ReturnOkResult()
         {
             //Arrange
             var productList = A.Fake<IEnumerable<ProductResponseDTO>>();
@@ -59,7 +83,7 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ProductController_GetOneProduct_ReturnSuccess()
+        public async Task ProductController_GetOneProduct_ReturnOkResult()
         {
             //Arrange
             var id = Guid.NewGuid();
@@ -72,11 +96,11 @@ namespace RestaApi.Api.Tests.Controllers
                 Name = product.Name,
                 Price = product.Price,
                 IsAvaiable = product.IsAvaiable,
-                Message = "Found successfully. ",
+                Message = "Message.",
                 Success = true
             };
 
-            A.CallTo(() => _applicationServiceProduct.GetById(id)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceProduct.GetById(A<Guid>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _productController.GetOneProduct(id);
@@ -87,18 +111,39 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ProductController_DeleteProduct_ReturnSuccess()
+        public async Task ProductController_GetOneProduct_ReturnNotFound()
+        {
+            //Arrange
+            var idInexistent = Guid.NewGuid();
+
+            ProductResponseDTO response = new()
+            {
+                Message = "Message.",
+                Success = false
+            };
+
+            A.CallTo(() => _applicationServiceProduct.GetById(A<Guid>.Ignored)).Returns(Task.FromResult(response));
+
+            //Act
+            var result = await _productController.GetOneProduct(idInexistent);
+
+            //Assert
+            result.Should().BeOfType<NotFoundObjectResult>().Which.StatusCode.Should().Be(404);
+        }
+
+        [Fact]
+        public async Task ProductController_DeleteProduct_ReturnOkResult()
         {
             //Arrange
             var id = Guid.NewGuid();
 
             BaseResponseDTO response = new()
             {
-                Message = "Product deleted successfully.",
+                Message = "Message.",
                 Success = true
             };
 
-            A.CallTo(() => _applicationServiceProduct.Delete(id)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceProduct.Delete(A<Guid>.Ignored)).Returns(Task.FromResult(response));
 
             //Act
             var result = await _productController.DeleteProduct(id);
@@ -109,7 +154,28 @@ namespace RestaApi.Api.Tests.Controllers
         }
 
         [Fact]
-        public async Task ProductController_UpdateProduc_ReturnSuccess()
+        public async Task ProductController_DeleteProduct_ReturnNotFound()
+        {
+            //Arrange
+            var idInexistent = Guid.NewGuid();
+
+            BaseResponseDTO response = new() 
+            {
+                Message = "Message.",
+                Success = false
+            };
+
+            A.CallTo(() => _applicationServiceProduct.Delete(A<Guid>.Ignored)).Returns(Task.FromResult(response));
+
+            //Act
+            var result = await _productController.DeleteProduct(idInexistent);
+
+            //Assert
+            result.Should().BeOfType<NotFoundObjectResult>().Which.StatusCode.Should().Be(404);
+        }
+
+        [Fact]
+        public async Task ProductController_UpdateProduc_ReturnOkResult()
         {
             //Arrange
             var id = Guid.NewGuid();
@@ -118,11 +184,12 @@ namespace RestaApi.Api.Tests.Controllers
 
             BaseResponseDTO response = new()
             {
-                Message = "Product updatind successfully.",
+                Message = "Message.",
                 Success = true
             };
 
-            A.CallTo(() => _applicationServiceProduct.Update(id, product)).Returns(Task.FromResult(response));
+            A.CallTo(() => _applicationServiceProduct.Update(A<Guid>.Ignored, A<ProductRequestUpdateDTO>.Ignored))
+                .Returns(Task.FromResult(response));
 
             //Act
             var result = await _productController.UpdateProdut(id, product);
@@ -130,6 +197,33 @@ namespace RestaApi.Api.Tests.Controllers
             //Assert
             result.Should().NotBeNull();
             result.Should().BeOfType<OkObjectResult>().Which.Value.Should().BeEquivalentTo(response);
+        }
+
+        [Fact]
+        public async Task ProductController_UpdateProduct_ReturnBadRequest()
+        {
+            //Arrange
+            var id = Guid.NewGuid();
+
+            var productInvalid = A.Fake<ProductRequestUpdateDTO>();
+
+            var error = A.Fake<Exception>();
+
+            BaseResponseDTO response = new()
+            {
+                Message = "Message.",
+                Success = false,
+                Error = error.Message
+            };
+
+            A.CallTo(() => _applicationServiceProduct.Update(A<Guid>.Ignored, A<ProductRequestUpdateDTO>.Ignored))
+                .Returns(Task.FromResult(response));
+
+            //Act
+            var result = await _productController.UpdateProdut(id, productInvalid);
+
+            //Assert
+            result.Should().BeOfType<BadRequestObjectResult>().Which.StatusCode.Should().Be(400);
         }
     }
 }

@@ -27,7 +27,6 @@ namespace RestApiDDD.Application.Mappers
                 FirstName = client.FirstName,
                 LastName = client.LastName,
                 Email = client.Email,
-                RegistrationDate = client.RegistrationDate,
                 IsActive = client.IsActive
             };
 
@@ -42,7 +41,6 @@ namespace RestApiDDD.Application.Mappers
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Email = c.Email,
-                RegistrationDate = c.RegistrationDate,
                 IsActive = c.IsActive
             });
 

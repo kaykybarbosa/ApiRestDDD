@@ -11,7 +11,7 @@ namespace RestApiDDD.Infrastructure.Data.Repositories
 
         public async Task<TEntity> Add(TEntity entity)
         {
-           _context.Set<TEntity>().Add(entity);
+           await _context.Set<TEntity>().AddAsync(entity);
            _context.SaveChanges();
             
            return entity;
@@ -23,8 +23,11 @@ namespace RestApiDDD.Infrastructure.Data.Repositories
 
             return entity;
         }
-        public async Task<IEnumerable<TEntity>> GetAll() => _context.Set<TEntity>().ToList();
-        public async Task<TEntity?> GetById(Guid id) => _context.Set<TEntity>().Find(id);
+        public async Task<IEnumerable<TEntity>> GetAll() => await _context.Set<TEntity>().ToListAsync();
+
+        public async Task<TEntity?> GetByEmail(string email) => await _context.Set<TEntity>().FindAsync(email);
+
+        public async Task<TEntity?> GetById(Guid id) => await _context.Set<TEntity>().FindAsync(id);
         public async Task<TEntity> Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;

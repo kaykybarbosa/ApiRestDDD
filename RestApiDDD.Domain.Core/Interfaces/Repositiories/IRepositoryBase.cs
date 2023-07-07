@@ -6,6 +6,7 @@
         Task<TEntity> Delete(TEntity entity);
         Task<TEntity> Update(TEntity entity);
         Task<IEnumerable<TEntity>> GetAll();
-        Task<TEntity> GetById(Guid id);
+        Task<TEntity?> GetById(Guid id);
+        Task<TEntity?> GetByEmail(string email);
     }
 }

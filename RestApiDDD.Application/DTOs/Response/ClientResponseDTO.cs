@@ -11,7 +11,6 @@ namespace RestApiDDD.Application.DTOs.Response
         public string? LastName { get; set;}
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Email { get; set; }
-        public DateTime RegistrationDate { get; set; }
         public bool IsActive { get; set; }
     }
 }

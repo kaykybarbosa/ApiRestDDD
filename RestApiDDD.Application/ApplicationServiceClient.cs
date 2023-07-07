@@ -24,7 +24,7 @@ namespace RestApiDDD.Application
             {
                 var emailNoExist = GetByEmail(clientDto.Email);
 
-                if(emailNoExist.Success)
+                if (emailNoExist.Success)
                 {
                     var client = _mapperClient.MapperDtoToEntity(clientDto);
                     await _serviceClient.Add(client!);
@@ -41,6 +41,24 @@ namespace RestApiDDD.Application
                 return new BaseResponseDTO(message: "Error while saving client.", success: false, error: e.Message);
             }
         }
+        public BaseResponseDTO GetByEmail(string email)
+        {
+            BaseResponseDTO response = new();
+            //var clientExist =  _serviceClient.GetAll().Result.Where(e => e.Email == email.Trim());
+            var clientExist =  _serviceClient.GetByEmail(email);
+
+            if (clientExist == null)
+            {
+                response.Success = true;
+            }
+            else
+            {
+                response.Message = "Client with this Email already exists.";
+                response.Success = false;
+            }
+
+            return response;
+        }
         
         public async Task<BaseResponseDTO> Delete(Guid id)
         {
@@ -56,7 +74,7 @@ namespace RestApiDDD.Application
                 }
                 else
                 {
-                    await _serviceClient.Delete(client.Result);
+                    await _serviceClient.Delete(client.Result!);
 
                     response.Message = "Client deleted successfully.";
                     response.Success = true;
@@ -77,49 +95,25 @@ namespace RestApiDDD.Application
             return _mapperClient.MapperListClientDto(clients);
         }
 
-        public BaseResponseDTO GetByEmail(string email)
-        {
-            BaseResponseDTO response = new();
-            var clientExist = _serviceClient.GetAll().Result.Where(e => e.Email == email.Trim());
-
-
-            if (clientExist == null)
-            {
-                response.Success = true;
-            }
-            else
-            {
-                response.Message = "Client with this Email already exists.";
-                response.Success = false;
-            }
-
-            return response;
-        }
-
         public async Task<ClientResponseDTO> GetById(Guid id)
         {
             try
             {
-                ClientResponseDTO response = new();
                 var clientFound = await _serviceClient.GetById(id);
 
-                if (clientFound == null) { 
-                    response.Message = "Cliend with this Id not found";
-                    response.Success = false;
+                if (clientFound == null) {
+                    
+                    return new ClientResponseDTO()
+                    {
+                        Message = "Cliend with this Id not found.",
+                        Success = false,
+                    };  
                 }
                 else 
                 {
-                    response.Id = clientFound.Id;
-                    response.FirstName = clientFound.FirstName;
-                    response.LastName = clientFound.LastName;
-                    response.Email = clientFound.Email;
-                    response.RegistrationDate = clientFound.RegistrationDate;
-                    response.IsActive = clientFound.IsActive;
-                    response.Message = "Found successfully.";
-                    response.Success = true;
+                    var client = _mapperClient.MapperEntityToDto(clientFound);
+                    return client;
                 }
-
-                return response;
             }
             catch (Exception e)
             {

@@ -99,7 +99,6 @@ namespace RestaApi.Api.Tests.Controllers
                 FirstName = client.FirstName,
                 LastName = client.LastName,
                 Email = client.Email,
-                RegistrationDate = client.RegistrationDate,
                 IsActive = client.IsActive,
                 Message = "Message.",
                 Success = true

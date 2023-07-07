@@ -30,7 +30,12 @@ namespace RestApiDDD.Services
             return await _repositoryBase.GetAll();
         }
 
-        public async Task<TEntity> GetById(Guid id)
+        public async Task<TEntity?> GetByEmail(string email)
+        {
+            return await _repositoryBase.GetByEmail(email);
+        }
+
+        public async Task<TEntity?> GetById(Guid id)
         {
             return await _repositoryBase.GetById(id);
         }

@@ -23,7 +23,7 @@ namespace RestApiDDD.Application
             try
             {
                 var product = _mapperProduct.MapperDtoToEntity(productDto);
-                await _serviceProduct.Add(product);
+                await _serviceProduct.Add(product!);
 
                 return new BaseResponseDTO(message: "Product added successfully.", success: true);
             }
@@ -38,14 +38,14 @@ namespace RestApiDDD.Application
             try
             {
                 BaseResponseDTO response = new();
-                var product = _serviceProduct.GetById(id);
+                var product = await _serviceProduct.GetById(id);
 
                 if (product == null) {
                     response.Message = "Product by Id not found.";
                     response.Success = false; 
                 }
                 else { 
-                    await _serviceProduct.Delete(product.Result);
+                    await _serviceProduct.Delete(product);
 
                     response.Message = "Product deleted successfully.";
                     response.Success = true; 

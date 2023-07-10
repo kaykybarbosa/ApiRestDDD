@@ -22,7 +22,7 @@ namespace RestApiDDD.Application
         {
             try 
             {
-                var emailNoExist = GetByEmail(clientDto.Email);
+                var emailNoExist = await GetByEmail(clientDto.Email);
 
                 if (emailNoExist.Success)
                 {
@@ -41,11 +41,10 @@ namespace RestApiDDD.Application
                 return new BaseResponseDTO(message: "Error while saving client.", success: false, error: e.Message);
             }
         }
-        public BaseResponseDTO GetByEmail(string email)
+        public async Task<BaseResponseDTO> GetByEmail(string email)
         {
             BaseResponseDTO response = new();
-            //var clientExist =  _serviceClient.GetAll().Result.Where(e => e.Email == email.Trim());
-            var clientExist =  _serviceClient.GetByEmail(email);
+            var clientExist =  await _serviceClient.GetByEmail(email);
 
             if (clientExist == null)
             {
@@ -65,7 +64,7 @@ namespace RestApiDDD.Application
             try
             {
                 BaseResponseDTO response = new();
-                var client = _serviceClient.GetById(id);
+                var client = await _serviceClient.GetById(id);
 
                 if(client == null) 
                 {
@@ -74,7 +73,7 @@ namespace RestApiDDD.Application
                 }
                 else
                 {
-                    await _serviceClient.Delete(client.Result!);
+                    await _serviceClient.Delete(client!);
 
                     response.Message = "Client deleted successfully.";
                     response.Success = true;
@@ -105,7 +104,7 @@ namespace RestApiDDD.Application
                     
                     return new ClientResponseDTO()
                     {
-                        Message = "Cliend with this Id not found.",
+                        Message = "Client with this Id not found.",
                         Success = false,
                     };  
                 }
@@ -135,7 +134,7 @@ namespace RestApiDDD.Application
 
                 if (clientFound == null)
                 {
-                    response.Message = "Client bywith this Id not found.";
+                    response.Message = "Client with this Id not found.";
                     response.Success = false;
                 }
                 else

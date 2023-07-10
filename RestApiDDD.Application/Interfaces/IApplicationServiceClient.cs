@@ -11,6 +11,6 @@ namespace RestApiDDD.Application.Interfaces
         Task<BaseResponseDTO> Update(Guid id, ClientRequestUpdateDTO clientDto);
         Task<IEnumerable<ClientResponseDTO>> GetAll();
         Task<ClientResponseDTO> GetById(Guid id);
-        BaseResponseDTO GetByEmail(string email);
+        Task<BaseResponseDTO> GetByEmail(string email);
     }
 }
